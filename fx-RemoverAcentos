@@ -1,0 +1,15 @@
+(texto as nullable text) as nullable text =>
+let
+    // Verifica se o texto é nulo. Se for, retorna nulo.
+    TextoCorrigido = if texto = null then null else
+    let
+        TextoComAcento = Text.ToList("ŠŽšžŸÀÁÂÃÄÅÈÉÊËÌÍÎÏÐÑÒÓÔÕÖÙÚÛÜÝÇàáâãäåèéêëìíîïðñòóôõöùúûüýÿç"),
+        TextoSemAcento = Text.ToList("SZszYAAAAAAEEEEIIIIDNOOOOOUUUUYCaaaaaaeeeeiiiidnooooouuuuyyc"),
+        Palavras = List.Zip({TextoComAcento, TextoSemAcento}),
+        Corrigido = Text.ToList(texto),
+        Substituir = List.ReplaceMatchingItems(Corrigido, Palavras),
+        Final = Text.Combine(Substituir)
+    in
+        Final
+in
+    TextoCorrigido

@@ -1,0 +1,8 @@
+(t as text) as text =>
+let
+    Trimmed     = Text.Trim(t),
+    Partes      = Text.Split(Trimmed, " "),
+    PartesValid = List.Select(Partes, each _ <> ""),
+    Resultado   = Text.Combine(PartesValid, " ")
+in
+    Resultado
